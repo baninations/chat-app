@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import { useState } from "react";
 
@@ -26,66 +28,71 @@ const Start = ({ navigation }) => {
   const [color, setColor] = useState(colorsList.d);
 
   return (
-    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View style={styles.container}>
-        <Text style={styles.appTitle}>Let's Chat</Text>
-        <View style={styles.controls}>
-          <TextInput
-            style={styles.textInput}
-            value={name}
-            onChangeText={setName}
-            placeholder="Your name"
-          />
-          <View style={styles.colorsArea}>
-            <Text style={styles.backgroundTextChooser}>
-              Choose Background Color:
-            </Text>
-            <View style={styles.colorContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.roundedBtn,
-                  color === colorsList.a && styles.selectedBtn,
-                  { backgroundColor: colorsList.a },
-                ]}
-                onPress={() => setColor(colorsList.a)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.roundedBtn,
-                  color === colorsList.b && styles.selectedBtn,
-                  { backgroundColor: colorsList.b },
-                ]}
-                onPress={() => setColor(colorsList.b)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.roundedBtn,
-                  color === colorsList.c && styles.selectedBtn,
-                  { backgroundColor: colorsList.c },
-                ]}
-                onPress={() => setColor(colorsList.c)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.roundedBtn,
-                  color === colorsList.d && styles.selectedBtn,
-                  { backgroundColor: colorsList.d },
-                ]}
-                onPress={() => setColor(colorsList.d)}
-              ></TouchableOpacity>
+    <View style={styles.containerAround}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <View style={styles.container}>
+          <Text style={styles.appTitle}>Let's Chat</Text>
+          <View style={styles.controls}>
+            <TextInput
+              style={styles.textInput}
+              value={name}
+              onChangeText={setName}
+              placeholder="Your name"
+            />
+            <View style={styles.colorsArea}>
+              <Text style={styles.backgroundTextChooser}>
+                Choose Background Color:
+              </Text>
+              <View style={styles.colorContainer}>
+                <TouchableOpacity
+                  style={[
+                    styles.roundedBtn,
+                    color === colorsList.a && styles.selectedBtn,
+                    { backgroundColor: colorsList.a },
+                  ]}
+                  onPress={() => setColor(colorsList.a)}
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.roundedBtn,
+                    color === colorsList.b && styles.selectedBtn,
+                    { backgroundColor: colorsList.b },
+                  ]}
+                  onPress={() => setColor(colorsList.b)}
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.roundedBtn,
+                    color === colorsList.c && styles.selectedBtn,
+                    { backgroundColor: colorsList.c },
+                  ]}
+                  onPress={() => setColor(colorsList.c)}
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.roundedBtn,
+                    color === colorsList.d && styles.selectedBtn,
+                    { backgroundColor: colorsList.d },
+                  ]}
+                  onPress={() => setColor(colorsList.d)}
+                ></TouchableOpacity>
+              </View>
             </View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate("Chat", { name: name, color: color })
+              }
+            >
+              <Text style={styles.buttonText}>Start Chatting</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate("Chat", { name: name, color: color })
-            }
-          >
-            <Text style={styles.buttonText}>Start Chatting</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+      {Platform.OS === "android" ? (
+        <KeyboardAvoidingView behavior="height" />
+      ) : null}
+    </View>
   );
 };
 
@@ -108,6 +115,7 @@ const styles = StyleSheet.create({
     color: "#75708380",
   },
   controls: {
+    // justifyContent: "space-around",
     justifyContent: "space-around",
     alignItems: "center",
     height: "44%",
@@ -159,6 +167,12 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "center",
+  },
+  containerWrap: {
+    flex: 1,
+  },
+  containerAround: {
+    flex: 1,
   },
 });
 
