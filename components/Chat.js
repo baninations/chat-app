@@ -7,18 +7,24 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
-const Chat = ({ route, navigation }) => {
+const Chat = ({ route, navigation, db }) => {
   // these variables are getting passed from Start screen
-  const { name, color } = route.params;
+  const { name, color, userID } = route.params;
 
   const [messages, setMessages] = useState([]);
 
   // append the new messages to the previous message list
   const onSend = (newMessages) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, newMessages)
-    );
+    addDoc(collection(db, "messages"), newMessages[0]);
   };
 
   // creates custom chat bubble
@@ -39,25 +45,22 @@ const Chat = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: "Hello developer",
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: "React Native",
-          avatar: "https://i.pravatar.cc/300",
-        },
-      },
-      {
-        // sets the system message
-        _id: 2,
-        text: "Welcome to the chat",
-        createdAt: new Date(),
-        system: true,
-      },
-    ]);
+    navigation.setOptions({ title: name });
+    const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
+    const unsubMessages = onSnapshot(q, (docs) => {
+      let newMessages = [];
+      docs.forEach((doc) => {
+        newMessages.push({
+          id: doc.id,
+          ...doc.data(),
+          createdAt: new Date(doc.data().createdAt.toMillis()),
+        });
+      });
+      setMessages(newMessages);
+    });
+    return () => {
+      if (unsubMessages) unsubMessages();
+    };
   }, []);
 
   useEffect(() => {
@@ -71,7 +74,8 @@ const Chat = ({ route, navigation }) => {
         renderBubble={renderBubble}
         onSend={(messages) => onSend(messages)}
         user={{
-          _id: 1,
+          _id: userID,
+          name: name,
         }}
       />
       {Platform.OS === "android" ? (

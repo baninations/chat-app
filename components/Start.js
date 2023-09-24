@@ -12,6 +12,7 @@ import {
   ScrollView,
   Keyboard,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { getAuth, signInAnonymously } from "firebase/auth";
