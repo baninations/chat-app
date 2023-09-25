@@ -16,7 +16,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-const Chat = ({ route, navigation, db }) => {
+const Chat = ({ route, navigation, db, isConnected }) => {
   // these variables are getting passed from Start screen
   const { name, color, userID } = route.params;
 
