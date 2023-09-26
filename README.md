@@ -33,3 +33,14 @@ This is a mobile chat application developed using React Native and Expo, featuri
 - **Chat Interface**: Built using the Gifted Chat library for a rich and user-friendly chat experience.
 
 - **Code Comments**: The codebase is well-documented with comments for easy understanding and maintenance.
+
+
+## To Set Up This Chat App Please Follow The Steps
+**1. Either download the code then open the folder in your IDE of choice or just clone this git repository "https://github.com/baninations/chat-app.git".**<br>
+**2. run "npm install" to install the necessary dependencies needed to run the app.**<br>
+**3. Once you've loaded the source code, it's time to install expo on your IDE "npm install -g expo-cli".**<br>
+**4. Download and Install Android Studio so you can use the Android emulator to test your app.**<br>
+**5. Download Expo go on your emulator, remember both the computer and the Emulator need to be connected to the**<br>
+**internet(You can also use a physical device, the physical device must also be connected to the same network).**<br>
+**6. Go to the terminal in your IDE and use this command "expo start" to start the app**<br>
+
