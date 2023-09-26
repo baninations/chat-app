@@ -20,7 +20,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-const Chat = ({ route, navigation, db, isConnected }) => {
+const Chat = ({ route, navigation, db, isConnected, storage }) => {
   // these variables are getting passed from Start screen
   const { name, color, userID } = route.params;
 
@@ -90,7 +90,7 @@ const Chat = ({ route, navigation, db, isConnected }) => {
   };
 
   const renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
+    return <CustomActions storage={storage} {...props} />;
   };
 
   return (

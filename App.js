@@ -10,6 +10,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
+import { getStorage } from "firebase/storage";
 
 import {
   getFirestore,
@@ -56,6 +57,7 @@ const App = () => {
   const db = initializeFirestore(app, {
     experimentalForceLongPolling: true,
   });
+  const storage = getStorage(app);
 
   return (
     <NavigationContainer>
@@ -66,6 +68,7 @@ const App = () => {
             <Chat
               connectionStatus={connectionStatus.isConnected}
               db={db}
+              storage={storage}
               {...props}
             />
           )}
