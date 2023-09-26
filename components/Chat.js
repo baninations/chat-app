@@ -10,6 +10,7 @@ import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import CustomActions from "./CustomActions";
+import * as ImagePicker from "expo-image-picker";
 import {
   collection,
   addDoc,

@@ -6,11 +6,41 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
+import * as ImagePicker from "expo-image-picker";
 
 const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
-  const onActionPress = () => {};
+  const actionSheet = useActionSheet();
+  const onActionPress = () => {
+    const options = [
+      "Choose From Library",
+      "Take Picture",
+      "Send Location",
+      "Cancel",
+    ];
+    const cancelButtonIndex = options.length - 1;
+    actionSheet.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      async (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            pickImage();
+            return;
+          case 1:
+            takePhoto();
+            return;
+          case 2:
+            getLocation();
+          default:
+        }
+      }
+    );
+  };
 
   return (
     <TouchableOpacity style={styles.container} onPress={onActionPress}>
