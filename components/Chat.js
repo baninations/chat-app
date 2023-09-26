@@ -7,6 +7,9 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
+import CustomActions from "./CustomActions";
 import {
   collection,
   addDoc,
@@ -67,12 +70,17 @@ const Chat = ({ route, navigation, db, isConnected }) => {
     navigation.setOptions({ title: name });
   }, []);
 
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
       <GiftedChat
         messages={messages}
         renderBubble={renderBubble}
         onSend={(messages) => onSend(messages)}
+        renderActions={renderCustomActions}
         user={{
           _id: userID,
           name: name,

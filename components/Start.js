@@ -16,6 +16,8 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
 
 // list of colors for the apps background UI
 const colorsList = {

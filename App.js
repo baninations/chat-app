@@ -8,6 +8,8 @@ import { initializeFirestore } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { useState, useEffect } from "react";
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
 
 import {
   getFirestore,
