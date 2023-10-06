@@ -2,6 +2,19 @@
 
 This is a mobile chat application developed using React Native and Expo, featuring real-time chat functionality, image sharing, location sharing, and offline data storage. Users can personalize their chat experience by choosing background colors.
 
+## Technologies used
+- Javascript
+- React Native
+- Expo
+- Android Studio(Emulator)
+- Gifted Chat
+- Real-Time App
+- Data Storage
+- Firebase
+- Firestore Authentication
+- Client-Side storage
+  
+
 ## Key Features
 
 - **User Customization**: Users can set their display name and choose a background color for the chat screen before joining the chat.
@@ -43,4 +56,8 @@ This is a mobile chat application developed using React Native and Expo, featuri
 **5. Download Expo go on your emulator, remember both the computer and the Emulator need to be connected to the**<br>
 **internet(You can also use a physical device, the physical device must also be connected to the same network).**<br>
 **6. Go to the terminal in your IDE and use this command "expo start" to start the app**<br>
+
+## Screenshots
+
+![Mobile](https://github.com/baninations/chat-app/blob/main/mobile.jpg)
 
